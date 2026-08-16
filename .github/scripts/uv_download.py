@@ -6,8 +6,6 @@ from __future__ import annotations
 import json
 import re
 import subprocess
-from concurrent.futures import ProcessPoolExecutor
-from os import cpu_count
 from urllib.request import urlopen
 
 
@@ -41,10 +39,10 @@ def get_python_versions_with_eol() -> set[str]:
         return {release["name"] for release in releases if release["isMaintained"]}
 
 
-def install_python_version(python_version: str) -> None:
+def install_python_version(python_version: list[str]) -> None:
     """Installs the given python version using uv."""
     print(f"Installing {python_version}...")
-    subprocess.run(["uv", "python", "install", "--no-bin", python_version], check=True)
+    subprocess.run(["uv", "python", "install", "--no-bin", *python_version], check=True)
 
 
 def main() -> None:
@@ -58,10 +56,7 @@ def main() -> None:
         if python_version in supported_minor_versions:
             supported_platform_builds.append(build)
 
-    num_cores = cpu_count() or 1
-    with ProcessPoolExecutor(max_workers=num_cores * 4) as executor:
-        for cpython_version in supported_platform_builds:
-            executor.submit(install_python_version, cpython_version)
+    install_python_version(supported_platform_builds)
 
 
 if __name__ == "__main__":
