@@ -8,6 +8,11 @@ on:
         required: false
         default: "Includes the latest build artifacts."
 
+  workflow_run:
+    workflows: ["Windows Python Development Kit"]
+    types:
+      - completed
+
 permissions:
   contents: write
 
