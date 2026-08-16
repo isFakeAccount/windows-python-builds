@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download all build artifacts
-        uses: dawidd6/action-download-artifact@v12
+        uses: dawidd6/action-download-artifact@v23
         with:
           workflow: "windows-python-dev-kit.yml"
           path: dist/
@@ -39,7 +39,7 @@ jobs:
           cat checksum.sha256
 
       - name: Create or update release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ steps.iso.outputs.tag }}
           name: ${{ steps.iso.outputs.tag }}

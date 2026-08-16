@@ -11,13 +11,13 @@ jobs:
     runs-on: ${{ 'windows-latest' }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v7
+        uses: astral-sh/setup-uv@v10
 
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v7
 
       - name: Download all Python versions using uv
         shell: pwsh
@@ -29,22 +29,22 @@ jobs:
         run: python .github/scripts/package_python.py
 
       - name: Upload x86_64 artifacts
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: python-windows-x86_64
-          path: dist/x86_64/
+          path: dist/x86_64/*
           overwrite: true
 
       - name: Upload x86 artifacts
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: python-windows-x86
-          path: dist/x86/
+          path: dist/x86/*
           overwrite: true
 
       - name: Upload aarch64 artifacts
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: python-windows-aarch64
-          path: dist/aarch64/
+          path: dist/aarch64/*
           overwrite: true
