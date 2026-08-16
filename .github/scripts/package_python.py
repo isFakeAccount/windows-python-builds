@@ -15,7 +15,7 @@ def get_uv_python_dirs() -> list[Path]:
     result = subprocess.run(["uv", "python", "dir"], capture_output=True, text=True, check=True)
     python_dir = Path(result.stdout.strip())
     cpython_installation_dirs = python_dir.glob("cpython-*")
-    return list(cpython_installation_dirs)
+    return [_path for _path in cpython_installation_dirs if not _path.is_junction()]
 
 
 def copy_python_dev_files(src_dir: Path, dest_root: Path) -> None:
