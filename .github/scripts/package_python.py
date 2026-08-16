@@ -12,7 +12,7 @@ from pathlib import Path
 
 def get_uv_python_dirs() -> list[Path]:
     """Get paths of all the python installations by uv."""
-    result = subprocess.run(["uv", "python", "dir"], capture_output=True, text=True, check=True)  # noqa: S607
+    result = subprocess.run(["uv", "python", "dir"], capture_output=True, text=True, check=True)
     python_dir = Path(result.stdout.strip())
     cpython_installation_dirs = python_dir.glob("cpython-*")
     return list(cpython_installation_dirs)

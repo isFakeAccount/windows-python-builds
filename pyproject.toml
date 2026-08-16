@@ -1,0 +1,10 @@
+[project]
+name = "windows-python-builds"
+version = "0.1.0"
+description = "Project to download Python Windows dev libraries using Github Actions."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = []
+
+[tool.ruff]
+line-length = 160
