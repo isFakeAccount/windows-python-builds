@@ -25,7 +25,6 @@ jobs:
         with:
           workflow: "windows-python-dev-kit.yml"
           path: dist/
-          skip_unpack: true
 
       - name: Generate ISO8601 tag (git-safe)
         id: iso
